@@ -17,15 +17,16 @@ def save(images):
         y_set = f.create_dataset("y_set", (1, 16), maxshape=(None, 16), dtype='u1')
 
     for im in images:
+        if im is False:
+            continue
+
         # set image
         pixels = np.asarray(im[0])[:, :, 0]
         x_set[x_set.shape[0] - 1, :, :] = pixels
         x_set.resize(x_set.shape[0] + 1, 0)
 
         # set label
-        dvorak = im[1]
-        print(dvorak)
-        y_set[y_set.shape[0] - 1, :] = dvorak
+        y_set[y_set.shape[0] - 1, :] = im[1]
         y_set.resize(y_set.shape[0] + 1, 0)
 
 """
