@@ -6,13 +6,14 @@ def validate(img):
     if img.satellite not in main.valid_satellites:
         return False
 
-    # satellite didn't hit 85% of the storm
-    if img.pc < 85:
+    # satellite didn't hit 98% of the storm
+    if img.pc < 98:
         return False
 
     return True
 
-def validateSequence(img, prevImgs):
+
+def validate_sequence(img, prevImgs):
     if not validate(img):
         return False
 
@@ -29,14 +30,12 @@ def validateSequence(img, prevImgs):
     return True
 
 
-
-# due to issues with satellite imagery, sometimes the edges will contain no data (black pixels)
+# due to issues with satellite imagery, sometimes the edges will contain no data (black pixels) despite saying the photo is valid
 # here we check the average intensity of all edges
 # if any edge is below 75 average, then there's a bunch of pure black pixels
 
-# UNUSED
 
-"""def validate(im):
+def validate_edges(im):
     source = im.load()
 
     sum1 = 0
@@ -88,5 +87,4 @@ def validateSequence(img, prevImgs):
     average4 = sum4 / ctr
 
     lowestAvg = min(average1, average2, average3, average4)
-
-    return lowestAvg < 75"""
+    return lowestAvg < 75

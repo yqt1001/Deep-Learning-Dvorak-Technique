@@ -15,3 +15,7 @@ class Image():
         self.name = desc[5]
         self.wind = int(desc[6][:len(desc[6])-3])  # convert from '100kts' to '100'
         self.pc = int(desc[10][:len(desc[10])-2])  # convert from '100pc' to '100'
+
+    def to_string(self):
+        return self.date + self.ztime + " " + self.name + " " + str(self.wind) + "kts " \
+               + self.satellite + " " + str(self.pc) + "pc"
