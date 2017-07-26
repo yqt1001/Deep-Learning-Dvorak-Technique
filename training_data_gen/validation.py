@@ -2,9 +2,9 @@ import main
 
 
 def validate(img):
-    # unknown satellite, could be garbage
-    if img.satellite not in main.valid_satellites:
-        return False
+    # unknown satellite, could be garbage [nah nvm its fine too many god damn satellites]
+#    if img.satellite not in main.valid_satellites:
+#        return False
 
     # satellite didn't hit 98% of the storm
     if img.pc < 98:
@@ -20,7 +20,7 @@ def validate_sequence(img, prevImgs):
 
     # check if there was another intensity change in the last 3 hours
     for i in prevImgs:
-        if i.wind != img.wind:
+        if i.valid and i.wind != img.wind:
             if ((img.time - i.time).seconds / 3600) <= 3:
                 return False
 

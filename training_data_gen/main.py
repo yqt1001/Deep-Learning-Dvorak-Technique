@@ -3,10 +3,10 @@ import html_loader
 import os
 
 save_images = True
-valid_satellites = ["goes13", "goes15", "himawari8", "msg3", "msg1"]
-basins = ["ATL/", "EPAC/", "IO/", "WPAC/"]
+valid_satellites = ["goes11", "goes12", "goes13", "goes15", "himawari8", "msg3", "msg2", "msg1", "mtsat2", "mtsat1r", "meteo7", "gms6"]
+basins = ["ATL/", "CPAC/", "EPAC/", "IO/", "WPAC/"]
 data_out_file_name = "training"
-year_url = "https://www.nrlmry.navy.mil/tcdat/tc17/"
+year_url = "https://www.nrlmry.navy.mil/tcdat/tc04/"
 basin_url = ""
 storm_url = ""
 

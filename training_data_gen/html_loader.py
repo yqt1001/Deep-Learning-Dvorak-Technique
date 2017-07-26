@@ -23,6 +23,9 @@ def load_storm(url):
     to_dl = []
     for i in range(len(images)):
         image = images[i]
+        if image.valid is False:
+            continue
+
         # intensity increase to deal with
         if image.wind > intensity_ptr:
             if intensity_ptr == 0 and image.wind <= 30 and validation.validate(image):
@@ -62,7 +65,7 @@ def load_basin(url):
     # process incoming data, skip invests
     to_dl = []
     for stormURL in parser.urls:
-        if stormURL[0] == "9":
+        if stormURL[0] == "9" or not stormURL[2].isalpha():
             continue
         newURL = url + stormURL + "ir/geo/1km_bw/"
         to_dl.append(newURL)

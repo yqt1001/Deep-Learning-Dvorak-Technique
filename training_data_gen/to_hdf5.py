@@ -30,10 +30,16 @@ def save(images):
         y_set.resize(y_set.shape[0] + 1, 0)
 
 """
-f = h5py.File('test.hdf5', 'a')
-dset = f["."]["x_set"]
 
-pixels = dset[0,:,:]
+f = h5py.File('../training_data/training.hdf5', 'a')
+dset = f["."]["y_set"]
 
-im = Image.fromarray(pixels)
-im.save("out0.png")"""
+print("y_set: " + str(dset.shape))
+
+sum = np.zeros(16,)
+for i in range(dset.shape[0]):
+    sum += dset[i]
+
+print(sum)
+
+"""
