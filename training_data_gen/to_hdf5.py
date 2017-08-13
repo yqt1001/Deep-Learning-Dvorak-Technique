@@ -9,7 +9,7 @@ def save(images):
     try:
         x_set = f["."]["x_set"]
     except KeyError:
-        x_set = f.create_dataset("x_set", (1, 166, 166), maxshape=(None, 166, 166), dtype='u1')
+        x_set = f.create_dataset("x_set", (1, 166, 166, 1), maxshape=(None, 166, 166, 1), dtype='u1')
 
     try:
         y_set = f["."]["y_set"]
@@ -22,19 +22,25 @@ def save(images):
 
         # set image
         pixels = np.asarray(im[0])[:, :, 0]
-        x_set[x_set.shape[0] - 1, :, :] = pixels
+        x_set[x_set.shape[0] - 1, :] = pixels[..., None]
         x_set.resize(x_set.shape[0] + 1, 0)
 
         # set label
         y_set[y_set.shape[0] - 1, :] = im[1]
         y_set.resize(y_set.shape[0] + 1, 0)
 
-"""
+#"""
 
 f = h5py.File('../training_data/training.hdf5', 'a')
 dset = f["."]["y_set"]
 
+print("x_set: " + str(f["."]["x_set"].shape))
 print("y_set: " + str(dset.shape))
+
+#print(dset[1, 0, 0, :])
+
+#im = Image.fromarray(dset[0, :, :, 0])
+#im.save("out.png")
 
 sum = np.zeros(16,)
 for i in range(dset.shape[0]):
@@ -42,4 +48,4 @@ for i in range(dset.shape[0]):
 
 print(sum)
 
-"""
+#"""
